@@ -4,10 +4,11 @@
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
+	<link rel="icon" href="img/favicon.ico" type="image/x-icon">
+	<link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon">
 	<link rel="stylesheet" href="styles/normalize.css">
 	<link rel="stylesheet" href="styles/swiper-bundle.min.css">
-	<link rel="stylesheet" href="styles/style.css">
+	<link rel="stylesheet" href="styles/style.min.css">
 
 	<title>ERGO.RENT</title>
 </head>
@@ -366,9 +367,9 @@
 					</div>
 				</div>
 				<div class="fb-inner__right">
-					<form action="#" class="fb-form">
-						<input type="text" class="fb-form__input" placeholder="Ваш E-mail">
-						<textarea class="fb-form__textarea" placeholder="Ваш вопрос..."></textarea>
+					<form action="#" id="fb-form" class="fb-form">
+						<input name="email" type="email" class="fb-form__input" placeholder="Ваш E-mail">
+						<textarea name="text" class="fb-form__textarea" placeholder="Ваш вопрос..."></textarea>
 						<button type="submit" class="btn fb-form__btn">Отправить</button>
 					</form><!-- /.fb-form -->
 				</div>
@@ -420,6 +421,8 @@
 		</div>
 	</footer><!-- /.footer -->
 
+	<script src="scripts/jquery-3.5.1.min.js"></script>
+	<script src="scripts/jquery.validate.min.js"></script>
 	<script src="scripts/swiper-bundle.min.js"></script>
 	<script src="scripts/script.js"></script>
 </body>

@@ -1,31 +1,30 @@
-document.addEventListener("DOMContentLoaded", function() {
-
+document.addEventListener('DOMContentLoaded', function () {
   // elems
 
-  const screenBlock = document.querySelector(".screen"),
-        screenWrapper = document.querySelector(".screen__wrapper"),
-        menu = document.querySelector(".menu"),
-        menuInner = menu.querySelector(".menu__inner"),
-        burger = document.querySelector(".burger"),
-        menuClose = document.querySelector(".menu__close"),
-        serviceBlock = document.querySelector(".service"),
-        serviceInnerLeft = serviceBlock.querySelector(".service-inner__left"),
-        serviceInnerRight = serviceBlock.querySelector(".service-inner__right"),
-        syncBlock = document.querySelector(".sync"),
-        syncInner = document.querySelector(".sync .container"),
-        sections = document.querySelectorAll("SECTION"),
-        scrollBtnPrev = document.querySelector(".scroll-btn-prev"),
-        scrollBtnNext = document.querySelector(".scroll-btn-next"),
-        condsBlock = document.querySelector(".conds");
-        // condsLeaves = condsBlock.querySelectorAll(".leaf");
+  const screenBlock = document.querySelector('.screen'),
+    screenWrapper = document.querySelector('.screen__wrapper'),
+    menu = document.querySelector('.menu'),
+    menuInner = menu.querySelector('.menu__inner'),
+    burger = document.querySelector('.burger'),
+    menuClose = document.querySelector('.menu__close'),
+    serviceBlock = document.querySelector('.service'),
+    serviceInnerLeft = serviceBlock.querySelector('.service-inner__left'),
+    serviceInnerRight = serviceBlock.querySelector('.service-inner__right'),
+    syncBlock = document.querySelector('.sync'),
+    syncInner = document.querySelector('.sync .container'),
+    sections = document.querySelectorAll('SECTION'),
+    scrollBtnPrev = document.querySelector('.scroll-btn-prev'),
+    scrollBtnNext = document.querySelector('.scroll-btn-next'),
+    condsBlock = document.querySelector('.conds');
+  // condsLeaves = condsBlock.querySelectorAll(".leaf");
 
   // data
 
   let menuWidth,
-      syncTabIsInsert,
-      serviceAnimIsStart,
-      btnNextIsClicked = false,
-      btnPrevIsClicked = false;
+    syncTabIsInsert,
+    serviceAnimIsStart,
+    btnNextIsClicked = false,
+    btnPrevIsClicked = false;
 
   // variable width of menu
 
@@ -40,9 +39,15 @@ document.addEventListener("DOMContentLoaded", function() {
   }
 
   if (screen.width < 768) {
-    screenWrapper.insertAdjacentHTML('beforeend', '<img class="screen__laptop" src="./img/desktop.png" alt="Компьютер">');
+    screenWrapper.insertAdjacentHTML(
+      'beforeend',
+      '<img class="screen__laptop" src="./img/desktop.png" alt="Компьютер">'
+    );
   } else {
-    screenWrapper.insertAdjacentHTML('beforeend', '<img class="screen__laptop" src="./img/laptop.gif" alt="Ноутбук">');
+    screenWrapper.insertAdjacentHTML(
+      'beforeend',
+      '<img class="screen__laptop" src="./img/laptop.gif" alt="Ноутбук">'
+    );
   }
 
   menu.dataset.slided = 'false';
@@ -72,7 +77,7 @@ document.addEventListener("DOMContentLoaded", function() {
   let totalTimeServiceAnim = 16000;
 
   function initServicePlayback() {
-    setTimeout(function() {
+    setTimeout(function () {
       serviceInnerLeft.innerHTML = `
       <div class="service-item__wrapper servcieItemFadeIn">
         <span class="service-item__num">1</span>
@@ -84,7 +89,7 @@ document.addEventListener("DOMContentLoaded", function() {
       </div>`;
     }, 0);
 
-    setTimeout(function() {
+    setTimeout(function () {
       serviceInnerLeft.innerHTML = `
       <div class="service-item__wrapper servcieItemFadeIn">
         <span class="service-item__num">2</span>
@@ -94,9 +99,9 @@ document.addEventListener("DOMContentLoaded", function() {
       <div class="service-icon serviceImgBubble">
         <img class="service-icon__img" src="img/Client-2.gif" alt="Работа с клиентами">
       </div>`;
-    }, (totalTimeServiceAnim / 4));
+    }, totalTimeServiceAnim / 4);
 
-    setTimeout(function() {
+    setTimeout(function () {
       serviceInnerLeft.innerHTML = `
       <div class="service-item__wrapper servcieItemFadeIn">
         <span class="service-item__num">3</span>
@@ -108,7 +113,7 @@ document.addEventListener("DOMContentLoaded", function() {
       </div>`;
     }, (totalTimeServiceAnim / 4) * 2);
 
-    setTimeout(function() {
+    setTimeout(function () {
       serviceInnerLeft.innerHTML = `
       <div class="service-item__wrapper servcieItemFadeIn">
         <span class="service-item__num">4</span>
@@ -121,54 +126,60 @@ document.addEventListener("DOMContentLoaded", function() {
     }, (totalTimeServiceAnim / 4) * 3);
   }
 
-
-
-
   // появление планета и проигрывания анимаций по скроллу
 
-  window.addEventListener("scroll", function() {
+  window.addEventListener('scroll', function () {
     syncTabIsInsert = syncBlock.dataset.gifInsert == 'false' ? true : false;
-    serviceAnimIsStart = serviceBlock.dataset.playbackStart == 'false' ? true : false;
+    serviceAnimIsStart =
+      serviceBlock.dataset.playbackStart == 'false' ? true : false;
 
     // повяление гифок и анимация
 
-    if (screen.width > 768 && syncBlock.getBoundingClientRect().top < 550 && syncTabIsInsert) {
-      syncInner.insertAdjacentHTML("beforeend", '<img class="sync__tablet sync__tablet_gif tabFadeIn" src="img/tab.gif" alt="Планшет">');
+    if (
+      screen.width > 768 &&
+      syncBlock.getBoundingClientRect().top < 550 &&
+      syncTabIsInsert
+    ) {
+      syncInner.insertAdjacentHTML(
+        'beforeend',
+        '<img class="sync__tablet sync__tablet_gif tabFadeIn" src="img/tab.gif" alt="Планшет">'
+      );
       syncBlock.dataset.gifInsert = 'true';
     }
 
-    if (serviceInnerLeft.getBoundingClientRect().top < 600 && serviceAnimIsStart) {
+    if (
+      serviceInnerLeft.getBoundingClientRect().top < 600 &&
+      serviceAnimIsStart
+    ) {
       initServicePlayback();
       setInterval(initServicePlayback, totalTimeServiceAnim);
       serviceBlock.dataset.playbackStart = 'true';
     }
-
   });
-
 
   // таймер
 
   function getTimeRemaining(endtime) {
     let t = Date.parse(endtime) - Date.parse(new Date()),
-        seconds = Math.floor((t / 1000) % 60),
-        minutes = Math.floor((t / 1000 / 60) % 60),
-        hours = Math.floor((t / (1000 * 60 * 60)) % 24),
-        days = Math.floor(t / (1000 * 60 * 60 * 24));
+      seconds = Math.floor((t / 1000) % 60),
+      minutes = Math.floor((t / 1000 / 60) % 60),
+      hours = Math.floor((t / (1000 * 60 * 60)) % 24),
+      days = Math.floor(t / (1000 * 60 * 60 * 24));
     return {
-      'total': t,
-      'days': days,
-      'hours': hours,
-      'minutes': minutes,
-      'seconds': seconds
+      total: t,
+      days: days,
+      hours: hours,
+      minutes: minutes,
+      seconds: seconds,
     };
   }
 
   function initializeClock(id, endtime) {
-    let clock = document.querySelector("#count"),
-        daysSpan = clock.querySelector('#days'),
-        hoursSpan = clock.querySelector('#hours'),
-        minutesSpan = clock.querySelector('#minutes'),
-        secondsSpan = clock.querySelector('#seconds');
+    let clock = document.querySelector('#count'),
+      daysSpan = clock.querySelector('#days'),
+      hoursSpan = clock.querySelector('#hours'),
+      minutesSpan = clock.querySelector('#minutes'),
+      secondsSpan = clock.querySelector('#seconds');
 
     function updateClock() {
       let t = getTimeRemaining(endtime);
@@ -192,12 +203,12 @@ document.addEventListener("DOMContentLoaded", function() {
 
   // параллакс
 
-  if(screen.width > 1200) {
+  if (screen.width > 1200) {
     let parralaxCoordX, parralaxCoordY, blurValue;
-    condsBlock.addEventListener("mousemove", function(e) {
-      parralaxCoordX = (e.clientX) / 80;
-      parralaxCoordY = (e.clientY) / 80;
-      blurValue = (e.clientX) / 100;
+    condsBlock.addEventListener('mousemove', function (e) {
+      parralaxCoordX = e.clientX / 80;
+      parralaxCoordY = e.clientY / 80;
+      blurValue = e.clientX / 100;
       // condsLeaves.forEach(function(elem, i) {
       //   if (elem.dataset.leafType == 'clear') {
       //     elem.style.filter = "blur(" +  (blurValue.toFixed()) + "px)";
@@ -225,8 +236,29 @@ document.addEventListener("DOMContentLoaded", function() {
 
   // события для меню
 
-  burger.addEventListener("click", openMenu);
-  menuClose.addEventListener("click", closeMenu);
-  screenBlock.addEventListener("click", closeMenu);
+  burger.addEventListener('click', openMenu);
+  menuClose.addEventListener('click', closeMenu);
+  screenBlock.addEventListener('click', closeMenu);
+});
 
+// валидация
+$(document).ready(function () {
+  function validateForms(form) {
+    $(form).validate({
+      rules: {
+        email: {
+          required: true,
+          email: true,
+        },
+      },
+      messages: {
+        email: {
+          required: 'Пожалуйста, введите свою почту',
+          email: 'Неправильно введена почта',
+        },
+      },
+    });
+  }
+
+  validateForms('#fb-form');
 });
