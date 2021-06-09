@@ -38,17 +38,18 @@ document.addEventListener('DOMContentLoaded', function () {
     menuWidth = 250;
   }
 
-  if (screen.width < 768) {
-    screenWrapper.insertAdjacentHTML(
-      'beforeend',
-      '<img class="screen__laptop" src="./img/desktop.png" alt="Компьютер">'
-    );
-  } else {
-    screenWrapper.insertAdjacentHTML(
-      'beforeend',
-      '<img class="screen__laptop" src="./img/laptop.gif" alt="Ноутбук">'
-    );
-  }
+	// условие ниже не актуально оно не работало, было 2 картинки. пофиксил задав модификатор 2й картинке и изменив стили
+  // if (screen.width < 768) {
+  //   screenWrapper.insertAdjacentHTML(
+  //     'beforeend',
+  //     '<img class="screen__laptop" src="./img/desktop.png" alt="Компьютер">'
+  //   );
+  // } else {
+  //   screenWrapper.insertAdjacentHTML(
+  //     'beforeend',
+  //     '<img class="screen__laptop" src="./img/laptop.gif" alt="Ноутбук">'
+  //   );
+  // }
 
   menu.dataset.slided = 'false';
 
